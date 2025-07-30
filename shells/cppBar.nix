@@ -23,6 +23,6 @@ pkgs.mkShell {
   shell = "${pkgs.zsh}/bin/zsh";
 
   shellHook = ''
-    echo "you've entered the Cppbar shell"
+    echo "\nyou've entered the Cppbar shell"
   '';
 }
