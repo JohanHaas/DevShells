@@ -15,11 +15,22 @@
       forAllSystems = nixpkgs.lib.genAttrs supportedSystems;
       pkgsFor = system: nixpkgs.legacyPackages.${system};
 
-      importAndMapShell =
-        shellName: shellPath: forAllSystems (system: (pkgsFor system).callPackage shellPath { });
+      importShellForSystem = system: shellPath: (pkgsFor system).callPackage shellPath { };
 
-      allImportedShells = nixpkgs.lib.mapAttrs' importAndMapShell (
-        nixpkgs.lib.filter (name: builtins.hasSuffix ".nix" name) (builtins.readDir ./shells)
+      rawShellFiles = builtins.readDir ./shells;
+
+      allImportedShells = nixpkgs.lib.listToAttrs (
+        map (
+          fileName:
+          let
+            shellPath = ./shells + "/${fileName}";
+            shellName = nixpkgs.lib.removeSuffix ".nix" fileName;
+          in
+          {
+            name = shellName;
+            value = forAllSystems (system: importShellForSystem system shellPath);
+          }
+        ) (builtins.attrNames rawShellFiles)
       );
     in
     {
@@ -31,8 +42,8 @@
         };
       };
 
-      devShells = forAllSystems (system: {
-
-      });
+      devShells = forAllSystems (
+        system: (nixpkgs.lib.mapAttrs (name: shellAttrs: shellAttrs.${system}) allImportedShells)
+      );
     };
 }
