@@ -4,15 +4,21 @@
   ...
 }:
 pkgs.mkShell {
-  packages = with pkgs; [
-    gcc
-    cmake
-    ninja
-    gtkmm4
-    gtkmm3
-    wayland
-    wlroots
-  ];
+  packages =
+    with pkgs;
+    [
+      gcc
+      cmake
+      ninja
+      gtkmm4
+      gtkmm3
+      wayland
+      wlroots
+    ]
+    ++ [
+      # preinstalled
+      zsh
+    ];
 
   shell = "${pkgs.zsh}/bin/zsh";
 
