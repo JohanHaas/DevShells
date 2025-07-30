@@ -14,13 +14,11 @@ pkgs.mkShell {
       gtkmm3
       wayland
       wlroots
+
     ]
     ++ [
-      # preinstalled
-
+      git
     ];
-
-  shell = "${pkgs.zsh}/bin/zsh";
 
   shellHook = ''
     echo ""

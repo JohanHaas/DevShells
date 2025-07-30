@@ -6,8 +6,13 @@
   };
 
   outputs =
-    { self, nixpkgs }:
+    {
+      self,
+      nixpkgs,
+    }:
     let
+      baseShell = import ./template/Template.nix;
+
       supportedSystems = [
         "x86_64-linux"
         "aarch64-darwin"
