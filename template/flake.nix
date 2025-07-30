@@ -18,8 +18,6 @@
       MyDevShells,
     }:
     let
-      projectName = builtins.baseNameOf (toString self);
-
       SupportedSystems = [
         "x86_64-linux"
         "aarch64-darwin"
@@ -28,7 +26,7 @@
     in
     {
       devShells = forAllSystems (system: {
-        default = MyDevShells.devShells.${system}.projectName;
+        default = MyDevShells.devShells.${system}.replaceMe; # replaceMe
       });
     };
 }
