@@ -36,7 +36,7 @@
     {
 
       templates = {
-        shells = {
+        default = {
           description = "initialises shell Flake";
           path = ./template;
         };
