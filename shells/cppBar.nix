@@ -11,7 +11,7 @@ pkgs.mkShell {
     gtkmm4
     gtkmm3
     wayland
-    wrl-protocols
+    wrlroots
   ];
   shellHook = ''
     echo "you entered the Cppbar shell"
