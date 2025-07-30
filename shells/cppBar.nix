@@ -17,7 +17,7 @@ pkgs.mkShell {
     ]
     ++ [
       # preinstalled
-      zsh
+
     ];
 
   shell = "${pkgs.zsh}/bin/zsh";
