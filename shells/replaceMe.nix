@@ -15,5 +15,6 @@ pkgs.mkShell {
   shellHook = ''
     echo ""
     echo "you have not replaced the shell"
+    exit
   '';
 }
