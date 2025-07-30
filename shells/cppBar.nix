@@ -11,9 +11,9 @@ pkgs.mkShell {
     gtkmm4
     gtkmm3
     wayland
-    wrlroots
+    wlroots
   ];
   shellHook = ''
-    echo "you entered the Cppbar shell"
+    echo "you've entered the Cppbar shell"
   '';
 }
