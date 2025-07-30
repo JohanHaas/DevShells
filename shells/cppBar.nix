@@ -13,6 +13,9 @@ pkgs.mkShell {
     wayland
     wlroots
   ];
+
+  shell = "${pkgs.zsh}/bin/zsh";
+
   shellHook = ''
     echo "you've entered the Cppbar shell"
   '';
