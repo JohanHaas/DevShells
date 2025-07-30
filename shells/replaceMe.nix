@@ -9,12 +9,13 @@ pkgs.mkShell {
 
     ]
     ++ [
-      git
+      #git
     ];
 
   shellHook = ''
     echo ""
-    echo "you have not replaced the shell"
+    echo -e "\033[1;31mError:\033[0m you have not updated the shell"
+    echo ""
     exit
   '';
 }
