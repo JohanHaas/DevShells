@@ -25,6 +25,7 @@ pkgs.mkShell {
       libselinux
       libsepol
       fribidi
+      libthai
     ]
     ++ [
       git
