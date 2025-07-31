@@ -23,6 +23,7 @@ pkgs.mkShell {
       pcre2
       util-linux
       libselinux
+      libsepol
     ]
     ++ [
       git
