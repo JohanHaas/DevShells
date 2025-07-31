@@ -14,7 +14,11 @@ pkgs.mkShell {
       gtkmm3
       wayland
       wlroots
-
+      libnl
+      pipewire
+      upower
+      jsoncpp
+      spdlog
     ]
     ++ [
       git
