@@ -26,6 +26,8 @@ pkgs.mkShell {
       libsepol
       fribidi
       libthai
+      datrie-0
+      .2
     ]
     ++ [
       git
