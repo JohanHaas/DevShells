@@ -11,13 +11,12 @@ pkgs.mkShell {
       cmake
       ninja
       gtkmm4
-      gtkmm3
+      pkg-config
       wayland
       wlroots
       libnl
       pipewire
       upower
-      jsoncpp
       spdlog
     ]
     ++ [
