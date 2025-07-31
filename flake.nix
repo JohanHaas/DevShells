@@ -7,10 +7,9 @@
   };
 
   outputs =
-    {
+    inputs@{
       self,
       nixpkgs,
-      nixpkgs-unstable,
     }:
     let
       baseShell = import ./template/Template.nix;
