@@ -1,11 +1,11 @@
 {
   pkgs,
-  inputs,
+  pkgsUnstable,
   ...
 }:
 pkgs.mkShell {
   packages =
-    with inputs.nixpkgs-unstable;
+    with pkgsUnstable;
     [
       # --- Rust Toolchain ---
       rustc

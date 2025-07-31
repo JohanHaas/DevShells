@@ -20,12 +20,16 @@
         "aarch64-darwin"
       ];
       forAllSystems = nixpkgs.lib.genAttrs supportedSystems;
+
       pkgsFor = system: nixpkgs.legacyPackages.${system};
+      pkgsUnstableFor = system: nixpkgs-unstable.legacyPackages.${system};
 
       importShellForSystem =
         system: shellPath:
         (pkgsFor system).callPackage shellPath {
           inherit inputs;
+          pkgsStable = pkgsFor system;
+          pkgsUnstable = pkgsUnstableFor system;
         };
 
       rawShellFiles = builtins.readDir ./shells;

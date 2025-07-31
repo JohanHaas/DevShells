@@ -1,11 +1,12 @@
 #CppBar shell
 {
   pkgs,
+  pkgsStable,
   ...
 }:
 pkgs.mkShell {
   packages =
-    with pkgs;
+    with pkgsStable;
     [
       gcc
       cmake
