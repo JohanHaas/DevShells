@@ -10,6 +10,7 @@
     inputs@{
       self,
       nixpkgs,
+      nixpkgs-unstable,
     }:
     let
       baseShell = import ./template/Template.nix;
@@ -21,7 +22,11 @@
       forAllSystems = nixpkgs.lib.genAttrs supportedSystems;
       pkgsFor = system: nixpkgs.legacyPackages.${system};
 
-      importShellForSystem = system: shellPath: (pkgsFor system).callPackage shellPath { };
+      importShellForSystem =
+        system: shellPath:
+        (pkgsFor system).callPackage shellPath {
+          inherit inputs;
+        };
 
       rawShellFiles = builtins.readDir ./shells;
 
