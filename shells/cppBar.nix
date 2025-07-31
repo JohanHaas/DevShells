@@ -28,7 +28,7 @@ pkgs.mkShell {
       libthai
       libdatrie
       expat
-      xdmcp
+      libXdmcp
     ]
     ++ [
       git
