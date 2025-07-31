@@ -21,6 +21,7 @@ pkgs.mkShell {
       clang-tools
       kdePackages.wayland-protocols
       pcre2
+      util-linux
     ]
     ++ [
       git
