@@ -28,10 +28,10 @@ pkgs.mkShell {
       libthai
       libdatrie
       expat
+      xdmcp
     ]
     ++ [
       git
-      neovim
     ];
 
   shellHook = ''
