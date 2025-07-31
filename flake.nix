@@ -3,12 +3,14 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-24.05";
+    nixpkgs-unstable = "github:nixos/nixpkgs/nixos-unstable";
   };
 
   outputs =
     {
       self,
       nixpkgs,
+      nixpkgs-unstable,
     }:
     let
       baseShell = import ./template/Template.nix;
