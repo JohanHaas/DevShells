@@ -19,6 +19,7 @@ pkgs.mkShell {
       upower
       spdlog
       clang-tools
+      kdePackages.wayland-protocols
     ]
     ++ [
       git
