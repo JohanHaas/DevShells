@@ -22,6 +22,7 @@ pkgs.mkShell {
       kdePackages.wayland-protocols
       pcre2
       util-linux
+      libselinux
     ]
     ++ [
       git
