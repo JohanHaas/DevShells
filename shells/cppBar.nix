@@ -21,6 +21,7 @@ pkgs.mkShell {
     ]
     ++ [
       git
+      neovim
     ];
 
   shellHook = ''
