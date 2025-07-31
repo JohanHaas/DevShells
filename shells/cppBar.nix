@@ -18,6 +18,7 @@ pkgs.mkShell {
       pipewire
       upower
       spdlog
+      clang-tools
     ]
     ++ [
       git
