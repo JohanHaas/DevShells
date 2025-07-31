@@ -27,6 +27,7 @@ pkgs.mkShell {
       fribidi
       libthai
       libdatrie
+      expat
     ]
     ++ [
       git
