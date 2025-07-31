@@ -24,6 +24,7 @@ pkgs.mkShell {
       util-linux
       libselinux
       libsepol
+      fribidi
     ]
     ++ [
       git
