@@ -31,8 +31,7 @@ pkgs.mkShell {
 
   shellHook = ''
     echo ""
-    echo -e "\033[1;31mError:\033[0m you have not updated the shell"
+    echo "you have entered the rustBar shell"
     echo ""
-    exit
   '';
 }
