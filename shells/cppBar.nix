@@ -20,6 +20,7 @@ pkgs.mkShell {
       spdlog
       clang-tools
       kdePackages.wayland-protocols
+      pcre2
     ]
     ++ [
       git
