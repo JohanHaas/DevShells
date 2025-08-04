@@ -12,53 +12,20 @@
       nixpkgs,
       nixpkgs-unstable,
     }:
-    let
-      baseShell = import ./template/Template.nix;
-
-      supportedSystems = [
-        "x86_64-linux"
-        "aarch64-darwin"
-      ];
-      forAllSystems = nixpkgs.lib.genAttrs supportedSystems;
-
-      pkgsFor = system: nixpkgs.legacyPackages.${system};
-      pkgsUnstableFor = system: nixpkgs-unstable.legacyPackages.${system};
-
-      importShellForSystem =
-        system: shellPath:
-        (pkgsFor system).callPackage shellPath {
-          inherit inputs;
-          pkgsStable = pkgsFor system;
-          pkgsUnstable = pkgsUnstableFor system;
-        };
-
-      rawShellFiles = builtins.readDir ./shells;
-
-      allImportedShells = nixpkgs.lib.listToAttrs (
-        map (
-          fileName:
-          let
-            shellPath = ./shells + "/${fileName}";
-            shellName = nixpkgs.lib.removeSuffix ".nix" fileName;
-          in
-          {
-            name = shellName;
-            value = forAllSystems (system: importShellForSystem system shellPath);
-          }
-        ) (builtins.attrNames rawShellFiles)
-      );
-    in
     {
-
-      templates = {
-        default = {
-          description = "initialises shell Flake";
-          path = ./template;
-        };
-      };
-
-      devShells = forAllSystems (
-        system: (nixpkgs.lib.mapAttrs (name: shellAttrs: shellAttrs.${system}) allImportedShells)
-      );
+      templates =
+        let
+          shellDirs = builtins.readDir ./shells;
+          shellNames = builtins.attrNames shellDirs;
+        in
+        builtins.listToAttrs (
+          map (name: {
+            name = name;
+            value = {
+              path = ./shells/${name};
+              description = "Devshell for ${name}";
+            };
+          }) shellNames
+        );
     };
 }

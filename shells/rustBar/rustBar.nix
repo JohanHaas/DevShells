@@ -27,7 +27,7 @@ pkgs.mkShell {
       clang-tools # Für rust-analyzer (LSP), sehr wichtig für Autovervollständigung etc.
     ]
     ++ [
-      #git
+
     ];
 
   shellHook = ''
