@@ -12,20 +12,21 @@
       nixpkgs,
       nixpkgs-unstable,
     }:
+    let
+      shellDirs = builtins.readDir ./shells;
+      shellNames = builtins.attrNames shellDirs;
+    in
     {
-      templates =
-        let
-          shellDirs = builtins.readDir ./shells;
-          shellNames = builtins.attrNames shellDirs;
-        in
-        builtins.listToAttrs (
-          map (name: {
-            name = name;
-            value = {
-              path = ./shells/${name};
-              description = "Devshell for ${name}";
-            };
-          }) shellNames
-        );
+      templates = builtins.listToAttrs (
+        map (name: {
+          name = name;
+          value = {
+            path = ./shells/${name};
+            description = "Devshell for ${name}";
+          };
+        }) shellNames
+      );
+
+      listShells = shellNames;
     };
 }
