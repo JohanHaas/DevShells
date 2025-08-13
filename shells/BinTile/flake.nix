@@ -39,14 +39,14 @@
               pkg-config
               wayland
               wlroots
-              libxcb
+              xorg.libxcb
               libxkbcommon
               libinput
               cmake
               ninja
               mesa
             ];
-            env.RUST_SRC_PATH = "${pkgsUnstable.rust.packages.stable}";
+            env.RUST_SRC_PATH = "${pkgsUnstable.rust.packages.stable.rustPlatform.rustLibSrc}";
 
             shellHook = ''
               echo ""
