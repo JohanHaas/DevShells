@@ -1,5 +1,5 @@
 {
-  description = "devshell template";
+  description = "devshell for template";
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-24.05";
@@ -34,7 +34,8 @@
             ];
 
             shellHook = ''
-
+              echo ""
+              echo "you have entered template DevShell"
             '';
           };
         }

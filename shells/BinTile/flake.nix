@@ -23,15 +23,30 @@
       devShells = forAllSystems (
         system:
         let
-          pkgs = import nixpkgs { inherit system; };
-          pkgsUnstable = import nixpkgs-unstable { inherit system; };
+          pkgs = nixpkgs.legacyPackages.${system};
+          pkgsUnstable = nixpkgs-unstable.legacyPackages.${system};
         in
         {
           default = pkgs.mkShell {
 
-            packages = with pkgs; [
+            packages = with pkgsUnstable; [
+              cargo
+              rustc
+              rustfmt
+              clippy
+              rust-analyzer
 
+              pkg-config
+              wayland
+              wlroots
+              libxcb
+              libxkbcommon
+              libinput
+              cmake
+              ninja
+              mesa
             ];
+            env.RUST_SRC_PATH = "${pkgsUnstable.rust.packages.stable}";
 
             shellHook = ''
               echo ""
