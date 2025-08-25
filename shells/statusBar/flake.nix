@@ -1,5 +1,5 @@
 {
-  description = "devshell for BinTile";
+  description = "devshell for template";
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-24.05";
@@ -23,35 +23,30 @@
       devShells = forAllSystems (
         system:
         let
-          pkgs = nixpkgs.legacyPackages.${system};
-          pkgsUnstable = nixpkgs-unstable.legacyPackages.${system};
+          pkgs = import nixpkgs { inherit system; };
+          pkgsUnstable = import nixpkgs-unstable { inherit system; };
         in
         {
           default = pkgs.mkShell {
 
             packages = with pkgsUnstable; [
-              cargo
-              rustc
-              rustfmt
-              clippy
-              rust-analyzer
-
-              pkg-config
-              wayland
-              wlroots
-              xorg.libxcb
-              seatd
-              libxkbcommon
-              libinput
+              gcc
               cmake
-              ninja
-              mesa
+              pkg-config
+              gtk4
+              cairo
+              pango
+              cjson
+              pcre2
+              gtk4-layer-shell
+              mount
+              gvfs
+
             ];
-            env.RUST_SRC_PATH = "${pkgsUnstable.rust.packages.stable.rustPlatform.rustLibSrc}";
 
             shellHook = ''
               echo ""
-              echo "you have entered BinTile DevShell"
+              echo "you have entered statusBar DevShell"
             '';
           };
         }
