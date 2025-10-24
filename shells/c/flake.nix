@@ -32,7 +32,7 @@
 
           shellHook = ''
             echo ""
-            echo "you have entered template DevShell"
+            echo "you have entered c DevShell"
           '';
         };
       }
