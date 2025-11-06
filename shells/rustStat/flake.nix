@@ -6,52 +6,57 @@
     nixpkgs-unstable.url = "github:nixos/nixpkgs?ref=nixos-unstable";
   };
 
-  outputs =
-    {
-      self,
-      nixpkgs,
-      nixpkgs-unstable,
-    }:
-    let
-      supportedSystems = [
-        "x86_64-linux"
-        "aarch64-darwin"
-      ];
-      forAllSystems = nixpkgs.lib.genAttrs supportedSystems;
-    in
-    {
-      devShells = forAllSystems (
-        system:
-        let
-          pkgs = import nixpkgs { inherit system; };
-          pkgsUnstable = import nixpkgs-unstable { inherit system; };
-        in
-        {
-          default = pkgs.mkShell {
+  outputs = {
+    self,
+    nixpkgs,
+    nixpkgs-unstable,
+  }: let
+    supportedSystems = [
+      "x86_64-linux"
+      "aarch64-darwin"
+    ];
+    forAllSystems = nixpkgs.lib.genAttrs supportedSystems;
 
-            packages = with pkgs; [
-              rustc
-              cargo
-              rust-analyzer
-              openssl
-              pkg-config
-              clang
+    system = "x86_64-linux";
 
-              nodejs
-              yarn
+    pkgs = import nixpkgs {inherit system;};
+    pkgsUnstable = import nixpkgs-unstable {inherit system;};
 
-              webkitgtk
-              gtk3
-              libayatana-appindicator
-              dbus
-            ];
+    rustPackages = with pkgsUnstable; [
+      rustc
+      cargo
+      rustfmt
+      rust-analyzer
+      clippy
+      openssl
+      pkg-config
+      clang
+      gtk4-layer-shell
 
-            shellHook = ''
-              echo ""
-              echo "you have entered rustStat DevShell"
-            '';
-          };
-        }
-      );
-    };
+      nodejs
+      yarn
+
+      gtk4
+      libayatana-appindicator
+      dbus
+    ];
+  in {
+    devShells = forAllSystems (
+      system: let
+      in {
+        default = pkgs.mkShell {
+          buildInputs = rustPackages;
+
+          shellHook = ''
+            echo ""
+            echo "you have entered rustStat DevShell"
+          '';
+
+          nativeBuildInputs = [pkgs.pkg-config];
+
+          env.RUST_SRC_PATH = "${pkgs.rust.packages.stable.rustPlatform.rustLibSrc}";
+        };
+      }
+    );
+  };
 }
