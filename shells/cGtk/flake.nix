@@ -24,6 +24,11 @@
       in {
         default = pkgs.mkShell {
           packages = with pkgs; [
+            meson
+            ninja
+            gcc
+            gnumake
+
             gtk4
             glib
             gdk-pixbuf
@@ -32,6 +37,23 @@
             gtk4-layer-shell
 
             pkg-config
+
+            libsysprof-capture
+            pcre2
+            cairo
+            expat
+            util-linux
+            xorg.libXdmcp
+            libxkbcommon
+            wayland
+            mesa
+            libGL
+            libselinux
+            libsepol
+            fribidi
+            libthai
+            libdatrie
+            lerc
           ];
 
           shellHook = ''
